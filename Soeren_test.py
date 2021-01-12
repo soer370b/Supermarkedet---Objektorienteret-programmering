@@ -19,11 +19,11 @@ class Main(tk.Frame):
 
         self.logo.grid(row=0, column=0, rowspan=2, sticky="nsew")
         self.varegruppe = self.buttons[0]
-        self.varegruppe["text"] = "Varegrupper"
-        self.varegruppe["command"] = varegruppe()
+        self.varegruppe["text"] = "Varegruppe"
+        self.varegruppe["command"] = self.varegrup
         self.varer = self.buttons[1]
         self.varer['text'] = 'Varer'
-        self.varer['command'] = varer()
+        self.varer['command'] = self.vare
         self.buttons[0].grid(row=2, column=0, sticky="nsew")
         self.buttons[1].grid(row=3, column=0, sticky="nsew")
         self.buttons[2].grid(row=4, column=0, sticky="nsew")
@@ -42,12 +42,12 @@ class Main(tk.Frame):
         for col in range(3):
             self.grid_columnconfigure(col, weight=1)
 
-    def varegruppe(self):
+    def varegrup(self):
         print('Varegruppeside')
 
-    def varer(self):
+    def vare(self):
         print('Varer')
-        
+
 
 if __name__ == "__main__":
     root = tk.Tk()
