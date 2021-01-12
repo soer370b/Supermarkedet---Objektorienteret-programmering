@@ -17,14 +17,14 @@ class Application(tk.Frame):
     def create_widgets(self):
         self.varegruppe = tk.Button(self)
         self.varegruppe["text"] = "Varegrupper"
-        self.varegruppe["command"] = self.say_hi
+        self.varegruppe["command"] = self.varegruupper
         self.varegruppe['height'] = height
         self.varegruppe['width'] = width
         self.varegruppe.pack(side='top')
 
         self.vare = tk.Button(self)
         self.vare["text"] = "Vare"
-        self.vare["command"] = self.say_hi
+        self.vare["command"] = self.varer
         self.vare['height'] = height
         self.vare['width'] = width
         self.vare.pack(side='top')
@@ -35,9 +35,11 @@ class Application(tk.Frame):
         self.quit['width'] = width
         self.quit.pack(side='top')
 
-    def say_hi(self):
-        print("hi there, everyone!")
+    def varegruupper(self):
+        print("Varegrupper!")
 
+    def varer(self):
+        print('Varer')
 root = tk.Tk()
 app = Application(master=root)
 app.mainloop()
