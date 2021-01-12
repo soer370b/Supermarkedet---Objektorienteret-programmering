@@ -1,5 +1,12 @@
 import tkinter as tk
 
+
+def varegruppe():
+    print('Varegruppeside')
+
+def varer():
+    print('Varer')
+
 class Main(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -13,10 +20,10 @@ class Main(tk.Frame):
         self.logo.grid(row=0, column=0, rowspan=2, sticky="nsew")
         self.varegruppe = self.buttons[0]
         self.varegruppe["text"] = "Varegrupper"
-        self.varegruppe["command"] = self.varegruppe
+        self.varegruppe["command"] = varegruppe()
         self.varer = self.buttons[1]
         self.varer['text'] = 'Varer'
-        self.varer['command'] = self.varer
+        self.varer['command'] = varer()
         self.buttons[0].grid(row=2, column=0, sticky="nsew")
         self.buttons[1].grid(row=3, column=0, sticky="nsew")
         self.buttons[2].grid(row=4, column=0, sticky="nsew")
@@ -40,9 +47,7 @@ class Main(tk.Frame):
 
     def varer(self):
         print('Varer')
-
-
-
+        
 
 if __name__ == "__main__":
     root = tk.Tk()
