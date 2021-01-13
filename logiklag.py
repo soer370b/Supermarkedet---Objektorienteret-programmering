@@ -12,5 +12,12 @@ class Product():
 
 class Productgroup():
     def __init__(self):
-        self.id = 0
+        # self.id = 0
         self.name = ''
+
+class ProductID(type):
+    def __init__(self):
+        if type == 'EAN13':
+            print('EAN13')
+        if type == 'PLU':
+            print('PLU')
