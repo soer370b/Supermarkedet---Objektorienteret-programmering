@@ -10,6 +10,8 @@ print("Import complete")
 height = 8
 width = 20
 
+#Test fra undertegnet
+
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
