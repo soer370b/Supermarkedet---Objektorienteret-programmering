@@ -15,6 +15,9 @@ class Main(tk.Frame):
         self.varer = self.buttons[1]
         self.varer['text'] = 'Varer'
         self.varer['command'] = self.vare
+        self.log_ud = self.buttons[5]
+        self.varer['text'] = 'Log ud'
+        self.varer['command'] = self.vare
         self.buttons[0].grid(row=2, column=0, sticky="nsew")
         self.buttons[1].grid(row=3, column=0, sticky="nsew")
         self.buttons[2].grid(row=4, column=0, sticky="nsew")
@@ -39,6 +42,9 @@ class Main(tk.Frame):
 
     def vare(self):
         print('Varer')
+
+    def log__ud(self):
+        print('Log ud')
 
     def productgroup_Window(self):
         def close():
@@ -77,5 +83,3 @@ if __name__ == "__main__":
     Main(root).pack(fill="both", expand=True)
     root.geometry("1080x720")
     root.mainloop()
-=======
->>>>>>> Stashed changes
