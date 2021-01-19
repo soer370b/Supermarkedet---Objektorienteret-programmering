@@ -45,16 +45,11 @@ class Data:
         c.execute('UPDATE productgroups SET name = (?) WHERE name = (?)', (newname, name))
         con.commit()
 
-<<<<<<< HEAD
-    def delete_productgroup(self, name):
-=======
     def delete_productgroupe(self, name):
->>>>>>> 8d2f29fee8d812739e019f777a44212fc5d1f9e5
         c = con.cursor()
         c.execute('DELETE FROM productgroups WHERE name = (?)', (name,))
         con.commit()
 
-<<<<<<< HEAD
     def get_productgroups(self):
         c = con.cursor()
         c.execute('SELECT * FROM productgroups')
@@ -88,31 +83,3 @@ if __name__ == "__main__":
     name = 'Fisk'
     data.new_productgroup(name)
     data.get_productgroups()
-=======
-    def new_product(self, name, productid, price, productgroup, purchaseprice, location):
-        Product.name = name
-        Product.productid = productid
-        Product.price = price
-        Product.productgroup = productgroup
-        # Product.purchasedate = purchasedate
-        Product.purchaseprice = purchaseprice
-        Product.location = location
-
-        c = con.cursor()
-        c.execute('''INSERT INTO products (name, productid, price,
-                    productgroup, purchaseprice,
-                    location) VALUES (?, ?, ?, ?, ?, ?)''', (Product.name,
-                    Product.productid, Product.price, Product.productgroup,
-                    Product.purchaseprice, Product.location, ))
-        con.commit()
-    #note Der mangler en datetime i varekolonnen.
-
-    # name = 'Mejeri'
-    #
-    # new_productgroup(name)
-
-if __name__ == "__main__":
-    data = Data()
-    name = 'None food'
-    data.new_productgroup(name)
->>>>>>> 8d2f29fee8d812739e019f777a44212fc5d1f9e5
