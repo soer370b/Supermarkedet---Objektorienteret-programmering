@@ -1,3 +1,10 @@
+import tkinter as tk
+import matplotlib.pyplot as plt
+import numpy as np
+from logiklag import *
+from datalag import *
+print("Import complete")
+
 class Main(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -16,8 +23,8 @@ class Main(tk.Frame):
         self.varer['text'] = 'Varer'
         self.varer['command'] = self.vare
         self.log_ud = self.buttons[5]
-        self.varer['text'] = 'Log ud'
-        self.varer['command'] = self.vare
+        self.log_ud['text'] = 'Log ud'
+        self.log_ud['command'] = self.log__ud
         self.buttons[0].grid(row=2, column=0, sticky="nsew")
         self.buttons[1].grid(row=3, column=0, sticky="nsew")
         self.buttons[2].grid(row=4, column=0, sticky="nsew")
@@ -25,11 +32,6 @@ class Main(tk.Frame):
         self.buttons[4].grid(row=6, column=0, sticky="nsew")
         self.buttons[5].grid(row=7, column=0, sticky="nsew")
         self.main.grid(row=2, column=2, columnspan=2, rowspan=6)
-
-        for row in range(8):
-            self.grid_rowconfigure(row, weight=1)
-        for col in range(3):
-            self.grid_columnconfigure(col, weight=1)
 
         for row in range(8):
             self.grid_rowconfigure(row, weight=1)
@@ -46,11 +48,13 @@ class Main(tk.Frame):
     def log__ud(self):
         print('Log ud')
 
+
     def productgroup_Window(self):
         def close():
             self.productgroupWindow.destroy()
             self.productgroupWindow.update()
-        self.productgroupWindow = tk.Toplevel(self)
+        self.productgroupWindow = tk.Toplevel()
+        self.productgroupWindow.geometry("1080x720")
         self.productgroupWindow.grab_set()
         self.productgroupWindow.wm_title('Varegrupper')
 
@@ -69,12 +73,16 @@ class Main(tk.Frame):
         self.deleteproductgroup.grid(column=1, sticky="nsew")
 
     def createnewproductgroup(self):
+        def close():
+            self.create_newproductgroup.destroy()
+            self.create_newproductgroup.update()
         self.create_newproductgroup = tk.Toplevel()
+        self.create_newproductgroup.geometry("1080x720")
         self.create_newproductgroup.grab_set()
         self.create_newproductgroup.wm_title('Ny produktgruppe')
-
-        self.back = tk.Button(self.create_newproductgroup, text = 'Ny produktgruppe')
-        self.back.grid(column=1, sticky="nsew")
+        self.back_nprodutg = tk.Button(self.create_newproductgroup, text = 'Tilbage')
+        self.back_nprodutg['command'] = close
+        self.back_nprodutg.grid(column=1, sticky="nsew")
 
 
 
