@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import tkinter as tk
 import matplotlib.pyplot as plt
 import numpy as np
@@ -84,3 +85,5 @@ if __name__ == "__main__":
     Main(root).pack(fill="both", expand=True)
     root.geometry("1080x720")
     root.mainloop()
+=======
+>>>>>>> Stashed changes
