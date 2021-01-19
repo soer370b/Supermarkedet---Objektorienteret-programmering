@@ -42,16 +42,21 @@ class Main(tk.Frame):
 
     def varegrup(self):
         print('Varegruppeside')
-        self.productgroupWindow()
+        self.productgroup_Window()
 
     def vare(self):
         print('Varer')
 
-    def productgroupWindow(self):
-        self.productgroupWindow = tk.Toplevel()
+    def productgroup_Window(self):
+        def close():
+            self.productgroupWindow.destroy()
+            self.productgroupWindow.update()
+        self.productgroupWindow = tk.Toplevel(self)
+        self.productgroupWindow.grab_set()
         self.productgroupWindow.wm_title('Varegrupper')
 
         self.back = tk.Button(self.productgroupWindow, text = 'Tilbage')
+        self.back['command'] = close
         self.back.grid(column=1, sticky="nsew")
 
         self.newproductgroup = tk.Button(self.productgroupWindow, text = 'Ny varegruppe')
@@ -66,6 +71,7 @@ class Main(tk.Frame):
 
     def createnewproductgroup(self):
         self.create_newproductgroup = tk.Toplevel()
+        self.create_newproductgroup.grab_set()
         self.create_newproductgroup.wm_title('Ny produktgruppe')
 
         self.back = tk.Button(self.create_newproductgroup, text = 'Ny produktgruppe')
