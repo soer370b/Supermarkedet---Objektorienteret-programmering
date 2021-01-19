@@ -5,28 +5,6 @@ from logiklag import *
 from datalag import *
 print("Import complete")
 
-def varegruppe():
-    print('Varegruppeside')
-
-def varer():
-    print('Varer')
-
-def productgroupWindow():
-    productgroupWindow = tk.Tk()
-    productgroupWindow.wm_title('Varegrupper')
-
-    back = tk.Button(productgroupWindow, text = 'Tilbage')
-    back.grid(column=1, sticky="nsew")
-
-    newproductgroup = tk.Button(productgroupWindow, text = 'Ny varegruppe')
-    newproductgroup.grid(column=1, sticky="nsew")
-
-    editproductgroup = tk.Button(productgroupWindow, text = 'Ret varegruppe')
-    editproductgroup.grid(column=1, sticky="nsew")
-
-    deleteproductgroup = tk.Button(productgroupWindow, text = 'Slet varegruppe')
-    deleteproductgroup.grid(column=1, sticky="nsew")
-
 class Main(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -64,10 +42,35 @@ class Main(tk.Frame):
 
     def varegrup(self):
         print('Varegruppeside')
-        productgroupWindow()
+        self.productgroupWindow()
 
     def vare(self):
         print('Varer')
+
+    def productgroupWindow(self):
+        self.productgroupWindow = tk.Toplevel()
+        self.productgroupWindow.wm_title('Varegrupper')
+
+        self.back = tk.Button(self.productgroupWindow, text = 'Tilbage')
+        self.back.grid(column=1, sticky="nsew")
+
+        self.newproductgroup = tk.Button(self.productgroupWindow, text = 'Ny varegruppe')
+        self.newproductgroup['command'] = self.createnewproductgroup
+        self.newproductgroup.grid(column=1, sticky="nsew")
+
+        self.editproductgroup = tk.Button(self.productgroupWindow, text = 'Ret varegruppe')
+        self.editproductgroup.grid(column=1, sticky="nsew")
+
+        self.deleteproductgroup = tk.Button(self.productgroupWindow, text = 'Slet varegruppe')
+        self.deleteproductgroup.grid(column=1, sticky="nsew")
+
+    def createnewproductgroup(self):
+        self.create_newproductgroup = tk.Toplevel()
+        self.create_newproductgroup.wm_title('Ny produktgruppe')
+
+        self.back = tk.Button(self.create_newproductgroup, text = 'Ny produktgruppe')
+        self.back.grid(column=1, sticky="nsew")
+
 
 
 if __name__ == "__main__":
