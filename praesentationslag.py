@@ -1,11 +1,3 @@
-import tkinter as tk
-import matplotlib.pyplot as plt
-import numpy as np
-from logiklag import *
-from datalag import *
-print("Import complete")
-
-############################Start############################
 class Main(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -43,10 +35,41 @@ class Main(tk.Frame):
 
     def varegrup(self):
         print('Varegruppeside')
-        dialog = ProductgroupWindow()
+        self.productgroup_Window()
 
     def vare(self):
         print('Varer')
+
+    def productgroup_Window(self):
+        def close():
+            self.productgroupWindow.destroy()
+            self.productgroupWindow.update()
+        self.productgroupWindow = tk.Toplevel(self)
+        self.productgroupWindow.grab_set()
+        self.productgroupWindow.wm_title('Varegrupper')
+
+        self.back = tk.Button(self.productgroupWindow, text = 'Tilbage')
+        self.back['command'] = close
+        self.back.grid(column=1, sticky="nsew")
+
+        self.newproductgroup = tk.Button(self.productgroupWindow, text = 'Ny varegruppe')
+        self.newproductgroup['command'] = self.createnewproductgroup
+        self.newproductgroup.grid(column=1, sticky="nsew")
+
+        self.editproductgroup = tk.Button(self.productgroupWindow, text = 'Ret varegruppe')
+        self.editproductgroup.grid(column=1, sticky="nsew")
+
+        self.deleteproductgroup = tk.Button(self.productgroupWindow, text = 'Slet varegruppe')
+        self.deleteproductgroup.grid(column=1, sticky="nsew")
+
+    def createnewproductgroup(self):
+        self.create_newproductgroup = tk.Toplevel()
+        self.create_newproductgroup.grab_set()
+        self.create_newproductgroup.wm_title('Ny produktgruppe')
+
+        self.back = tk.Button(self.create_newproductgroup, text = 'Ny produktgruppe')
+        self.back.grid(column=1, sticky="nsew")
+
 
 
 if __name__ == "__main__":
@@ -54,3 +77,5 @@ if __name__ == "__main__":
     Main(root).pack(fill="both", expand=True)
     root.geometry("1080x720")
     root.mainloop()
+=======
+>>>>>>> Stashed changes
