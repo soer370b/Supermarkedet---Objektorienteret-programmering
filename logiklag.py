@@ -11,9 +11,9 @@ class Product():
         self.location = ''
 
 class Productgroup():
-    def __init__(self):
-        self.id = 0
-        self.name = ''
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
 
 class ProductID():
     def __init__(self, type):

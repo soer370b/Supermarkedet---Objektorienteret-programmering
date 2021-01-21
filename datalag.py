@@ -65,7 +65,6 @@ class Data:
             print('Navn = ' + pname + '\n')
             p = Productgroup(pid, pname)
             productgroups.append(p)
-        # list = [id, name]
         return productgroups
 
     def new_product(self, name, productid, price, productgroup, purchaseprice, location):
@@ -92,7 +91,6 @@ if __name__ == "__main__":
     name = 'Fisk'
     data.new_productgroup(name)
     a = data.get_productgroups()
-    print(a)
 
     for p in a:
         print(p.id, p.name)
