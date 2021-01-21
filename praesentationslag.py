@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import matplotlib.pyplot as plt
 import numpy as np
 from logiklag import *
@@ -22,6 +23,9 @@ class Main(tk.Frame):
         self.varer = self.buttons[1]
         self.varer['text'] = 'Varer'
         self.varer['command'] = self.vare
+        self.log_ud = self.buttons[5]
+        self.log_ud['text'] = 'Log ud'
+        self.log_ud['command'] = self.log__ud
         self.buttons[0].grid(row=2, column=0, sticky="nsew")
         self.buttons[1].grid(row=3, column=0, sticky="nsew")
         self.buttons[2].grid(row=4, column=0, sticky="nsew")
@@ -35,11 +39,6 @@ class Main(tk.Frame):
         for col in range(3):
             self.grid_columnconfigure(col, weight=1)
 
-        for row in range(8):
-            self.grid_rowconfigure(row, weight=1)
-        for col in range(3):
-            self.grid_columnconfigure(col, weight=1)
-
     def varegrup(self):
         print('Varegruppeside')
         self.productgroup_Window()
@@ -47,11 +46,17 @@ class Main(tk.Frame):
     def vare(self):
         print('Varer')
 
+    def log__ud(self):
+        print('Log ud')
+
+
     def productgroup_Window(self):
         def close():
             self.productgroupWindow.destroy()
             self.productgroupWindow.update()
-        self.productgroupWindow = tk.Toplevel(self)
+
+        self.productgroupWindow = tk.Toplevel()
+        self.productgroupWindow.geometry("1080x720")
         self.productgroupWindow.grab_set()
         self.productgroupWindow.wm_title('Varegrupper')
 
@@ -69,13 +74,23 @@ class Main(tk.Frame):
         self.deleteproductgroup = tk.Button(self.productgroupWindow, text = 'Slet varegruppe')
         self.deleteproductgroup.grid(column=1, sticky="nsew")
 
+        self.tree = ttk.Treeview(self.productgroupWindow, columns=("Name", "ID"), show = 'headings')
+        self.tree.heading("#1", text="Produktgruppe")
+        self.tree['displaycolumns'] = ('Name')
+        self.tree.grid(column = 2)
+
+
     def createnewproductgroup(self):
+        def close():
+            self.create_newproductgroup.destroy()
+            self.create_newproductgroup.update()
         self.create_newproductgroup = tk.Toplevel()
+        self.create_newproductgroup.geometry("1080x720")
         self.create_newproductgroup.grab_set()
         self.create_newproductgroup.wm_title('Ny produktgruppe')
-
-        self.back = tk.Button(self.create_newproductgroup, text = 'Ny produktgruppe')
-        self.back.grid(column=1, sticky="nsew")
+        self.back_nprodutg = tk.Button(self.create_newproductgroup, text = 'Tilbage')
+        self.back_nprodutg['command'] = close
+        self.back_nprodutg.grid(column=1, sticky="nsew")
 
 
 
