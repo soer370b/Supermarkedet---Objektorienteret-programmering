@@ -51,13 +51,21 @@ class Data:
         con.commit()
 
     def get_productgroups(self):
+        id = []
+        name = []
         c = con.cursor()
         c.execute('SELECT * FROM productgroups')
         data = c.fetchall()
         print('Der er ' + str(len(data)) + ' produktgrupper')
         for i in range(len(data)):
-            print('Id = ' + str(data[i][0]))
-            print('Navn = ' + str(data[i][1])+ '\n')
+            pid = str(data[i][0])
+            # print('Id = ' + pid)
+            pname = str(data[i][1])
+            # print('Navn = ' + pname + '\n')
+            id.append(pid)
+            name.append(pname)
+        list = [id, name]
+        return list
 
     def new_product(self, name, productid, price, productgroup, purchaseprice, location):
         Product.name = name

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import matplotlib.pyplot as plt
 import numpy as np
 from logiklag import *
@@ -53,6 +54,7 @@ class Main(tk.Frame):
         def close():
             self.productgroupWindow.destroy()
             self.productgroupWindow.update()
+
         self.productgroupWindow = tk.Toplevel()
         self.productgroupWindow.geometry("1080x720")
         self.productgroupWindow.grab_set()
@@ -71,6 +73,12 @@ class Main(tk.Frame):
 
         self.deleteproductgroup = tk.Button(self.productgroupWindow, text = 'Slet varegruppe')
         self.deleteproductgroup.grid(column=1, sticky="nsew")
+
+        self.tree = ttk.Treeview(self.productgroupWindow, columns=("Name", "ID"), show = 'headings')
+        self.tree.heading("#1", text="Produktgruppe")
+        self.tree['displaycolumns'] = ('Name')
+        self.tree.grid(column = 2)
+
 
     def createnewproductgroup(self):
         def close():
