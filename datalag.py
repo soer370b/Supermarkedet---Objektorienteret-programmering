@@ -40,14 +40,14 @@ class Data:
             c.execute('INSERT INTO productgroups (name) VALUES (?)', (name,))
             con.commit()
 
-    def edit_productgroup(self, name, newname):
+    def edit_productgroup(self, id, newname):
         c = con.cursor()
-        c.execute('UPDATE productgroups SET name = (?) WHERE name = (?)', (newname, name))
+        c.execute('UPDATE productgroups SET name = (?) WHERE id = (?)', (newname, id))
         con.commit()
 
-    def delete_productgroupe(self, name):
+    def delete_productgroup(self, id):
         c = con.cursor()
-        c.execute('DELETE FROM productgroups WHERE name = (?)', (name,))
+        c.execute('DELETE FROM productgroups WHERE id = (?)', (id,))
         con.commit()
 
     def get_productgroups(self):
