@@ -1,5 +1,6 @@
 import sqlite3
-from logiklag import Productgroup
+from logiklag import Productgroup, Product
+import Data_stregkode_vare_base
 print('Starter')
 con = sqlite3.connect('database.db')
 print('Database åbnet')
@@ -13,23 +14,13 @@ class Data:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name STRING)""")
             con.execute("""CREATE TABLE products (
-                id INTEGER PRIMARY KEY AUTOINCREMENT, productid INTEGER,
+                id INTEGER PRIMARY KEY AUTOINCREMENT, productid INTEGER, PLU INTEGER,
                 name STRING, price FLOAT, productgroup INTEGER,
                 purchaseprice FLOAT, location STRING)""")
             print('Tabellen er oprettet')
         except Exception as e:
             print('Tabellen er åben')
             print(e)
-
-    # def new_productgroup(self, name):
-    #     c = con.cursor()
-    #     c.execute('SELECT name FROM productgroups WHERE name = ? ', (name,))
-    #     a = c.fetchone()
-    #     if a[0] != name:
-    #         Productgroup.name = name
-    #         c = con.cursor()
-    #         c.execute('INSERT INTO productgroups (name) VALUES (?)', (Productgroup.name,))
-    #         con.commit()
 
     def new_productgroup(self, name):
         c = con.cursor()
@@ -67,26 +58,59 @@ class Data:
             productgroups.append(p)
         return productgroups
 
-    def new_product(self, name, productid, price, productgroup, purchaseprice, location):
-        Product.name = name
-        Product.productid = productid
-        Product.price = price
-        Product.productgroup = productgroup
-        # Product.purchasedate = purchasedate
-        Product.purchaseprice = purchaseprice
-        Product.location = location
+    def new_product(self, name, productid, PLU, price, productgroup, purchaseprice, location):
+        def productgroup_chek(productgroup):
+            cheker = False
+            pg = Data.get_productgroups()
+            for i in pg:
+                if i.name == productgroup:
+                    cheker = True
+            return cheker
 
-        c = con.cursor()
-        c.execute('''INSERT INTO products (name, productid, price,
-                    productgroup, purchaseprice,
-                    location) VALUES (?, ?, ?, ?, ?, ?)''', (Product.name,
-                    Product.productid, Product.price, Product.productgroup,
-                    Product.purchaseprice, Product.location, ))
-        con.commit()
-    #note Der mangler en datetime i varekolonnen.
+        print(productid)
+        if productid == '':
+            productid = Data_stregkode_vare_base.get_barcode_code()
+            print(productid)
 
+        elif len(productid) == 13:
+            print(productid)
+
+        elif len(productid) != 13:
+            print('ikke valid stregkode')
+            print(productid)
+        if productgroup_chek(productgroup) == True:
+            if PLU == '':
+                c = con.cursor()
+                c.execute('''INSERT INTO products (name, productid, price,
+                            productgroup, purchaseprice,
+                            location) VALUES (?, ?, ?, ?, ?, ?)''', (name,
+                            productid, price, productgroup,
+                            purchaseprice, location, ))
+                con.commit()
+
+            else:
+                c = con.cursor()
+                c.execute('''INSERT INTO products (name, productid, PLU, price,
+                            productgroup, purchaseprice,
+                            location) VALUES (?, ?, ?, ?, ?, ?, ?)''', (name,
+                            productid, PLU, price, productgroup,
+                            purchaseprice, location, ))
+                con.commit()
+        else:
+            print('Produktgruppen findes ikke!')
 
 if __name__ == "__main__":
+    Data = Data()
+    name = 'Øl'
+    id = ''
+    PLU = ''
+    price = 10
+    productgroup = 'Alkohol'
+    pprice = 5
+    location = 'Lager'
+    Data.new_product(name, id, PLU, price, productgroup, pprice, location)
+
+'''
     data = Data()
     name = 'Fisk'
     data.new_productgroup(name)
@@ -94,3 +118,4 @@ if __name__ == "__main__":
 
     for p in a:
         print(p.id, p.name)
+'''

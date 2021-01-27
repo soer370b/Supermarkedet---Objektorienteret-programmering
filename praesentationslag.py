@@ -13,6 +13,7 @@ class Main(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.Data = Data()
+        # self.Product = Product()
 
         self.logo = tk.Label(self, text="Logo")
         self.buttons = []
@@ -26,7 +27,7 @@ class Main(tk.Frame):
         self.varegruppe["command"] = self.varegrup
         self.varer = self.buttons[1]
         self.varer['text'] = 'Varer'
-        self.varer['command'] = self.vare
+        self.varer['command'] = self.products
         self.test_tabel = self.buttons[4]
         self.test_tabel['text'] = 'Opdater tabel TEST (productgroups)'
         self.test_tabel['command'] = self.update_productgroup_tabel
@@ -46,6 +47,7 @@ class Main(tk.Frame):
         for col in range(3):
             self.grid_columnconfigure(col, weight=1)
 
+# Productgroup
     def update_productgroup_tabel(self):
         l = self.Data.get_productgroups()
 
@@ -58,13 +60,9 @@ class Main(tk.Frame):
             self.tree.insert("", 0 , values=(id, name))
         self.tree.heading("#1", text="Produktgrupper")
 
-
     def varegrup(self):
         print('Varegruppeside')
         self.productgroup_Window()
-
-    def vare(self):
-        print('Varer')
 
     def log__ud(self):
         print('Log ud')
@@ -72,7 +70,6 @@ class Main(tk.Frame):
     def select_item(self, data):
         item = self.tree.focus()
         dic = self.tree.item(item)
-
 
     def productgroup_Window(self):
         def close():
@@ -107,7 +104,6 @@ class Main(tk.Frame):
         self.tree.bind('<ButtonRelease-1>', self.select_item)
         self.update_productgroup_tabel()
         self.tree.grid(row=0, rowspan=4, column = 2)
-
 
     def createnewproductgroup(self):
         def close():
@@ -207,6 +203,43 @@ class Main(tk.Frame):
         self.save_nprodutg['command'] = delete_pgroup
 
         tk.Label(self.create_newproductgroup, text='Den valgte produktgruppe er: {}'.format(item)).grid(row=0, column=2)
+
+#products
+    def products(self):
+        def close():
+            self.productWindow.destroy()
+            self.productWindow.update()
+        def mangler():
+            pass
+
+        self.productWindow = tk.Toplevel()
+        self.productWindow.geometry("1080x720")
+        self.productWindow.grab_set()
+        self.productWindow.wm_title('Varer')
+
+        self.back = tk.Button(self.productWindow, text = 'Tilbage')
+        self.back['command'] = close
+        self.back.grid(row=0, column=1, sticky="nsew")
+
+        self.newproduct = tk.Button(self.productWindow, text = 'Ny vare')
+        self.newproduct['command'] = mangler
+        self.newproduct.grid(row=1, column=1, sticky="nsew")
+
+        self.editproduct = tk.Button(self.productWindow, text = 'Ret vare')
+        self.editproduct['command'] = mangler
+        self.editproduct.grid(row=2, column=1, sticky="nsew")
+
+        self.deleteproduct = tk.Button(self.productWindow, text = 'Slet vare')
+        self.deleteproduct['command'] = mangler
+        self.deleteproduct.grid(row=3, column=1, sticky="nsew")
+
+
+        self.tree = ttk.Treeview(self.productWindow, columns=("Id", "Name"), show = 'headings')
+        self.tree.heading("#1", text="Varer")
+        self.tree['displaycolumns'] = ('Name')
+        self.tree.bind('<ButtonRelease-1>', self.select_item)
+        self.update_productgroup_tabel()
+        self.tree.grid(row=0, rowspan=4, column = 2)
 
 if __name__ == "__main__":
     root = tk.Tk()
