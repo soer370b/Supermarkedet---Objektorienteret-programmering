@@ -225,7 +225,7 @@ class Main(tk.Frame):
             self.productWindow.destroy()
             self.productWindow.update()
         def mangler():
-            pass
+            print('Mangler at blive implementeret')
         def new_product():
             def close():
                 self.create_newproduct.destroy()
