@@ -67,7 +67,7 @@ class Data:
                     cheker = True
             return cheker
 
-        print(productid)
+        type(productid)
         if productid == '':
             productid = Data_stregkode_vare_base.get_barcode_code()
             print(productid)
@@ -76,8 +76,11 @@ class Data:
             print(productid)
 
         elif len(productid) != 13:
-            print('ikke valid stregkode')
-            print(productid)
+            print('ikke valid stregkode, ny generet')
+            print('gammel stegkode: ' + productid)
+            productid = Data_stregkode_vare_base.get_barcode_code()
+            print('ny stegkode: ' + productid)
+
         if productgroup_chek(productgroup) == True:
             if PLU == '':
                 c = con.cursor()
@@ -102,12 +105,12 @@ class Data:
 if __name__ == "__main__":
     Data = Data()
     name = 'Øl'
-    id = ''
-    PLU = ''
+    id = '254889541835'
+    PLU = '654'
     price = 10
-    productgroup = 'Alkohol'
+    productgroup = 'Frost'
     pprice = 5
-    location = 'Lager'
+    location = 'Frost'
     Data.new_product(name, id, PLU, price, productgroup, pprice, location)
 
 '''
