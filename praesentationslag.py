@@ -35,7 +35,6 @@ class Main(tk.Frame):
         self.Data = Data()
         # self.Product = Product()
 
-        self.logo = tk.Label(self, text="Logo")
         self.buttons = []
         for i in range(6):
             self.buttons.append(tk.Button(self))
