@@ -3,12 +3,10 @@ from tkinter import ttk
 import matplotlib.pyplot as plt
 import numpy as np
 from logiklag import *
-<<<<<<< HEAD
 from datalag import Data
 print("Import complete")
 
 dic = ""
-=======
 from datalag import *
 from PIL import ImageTk, Image
 import os
@@ -19,7 +17,6 @@ dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname,"growingstore.png")
 
 infile = open(filename, mode='r', encoding="utf8")
->>>>>>> Thomas
 
 class Main(tk.Frame):
     def __init__(self, parent):
@@ -35,13 +32,10 @@ class Main(tk.Frame):
         #self.logo.image = img
         # self.logo.grid(column =x, row = y)
 
-<<<<<<< HEAD
         self.Data = Data()
         # self.Product = Product()
 
         self.logo = tk.Label(self, text="Logo")
-=======
->>>>>>> Thomas
         self.buttons = []
         for i in range(6):
             self.buttons.append(tk.Button(self))
@@ -53,14 +47,11 @@ class Main(tk.Frame):
         self.varegruppe["command"] = self.varegrup
         self.varer = self.buttons[1]
         self.varer['text'] = 'Varer'
-<<<<<<< HEAD
         self.varer['command'] = self.products
         self.test_tabel = self.buttons[4]
         self.test_tabel['text'] = 'Opdater tabel TEST (productgroups)'
         self.test_tabel['command'] = self.update_productgroup_tabel
-=======
         self.varer['command'] = self.vare
->>>>>>> Thomas
         self.log_ud = self.buttons[5]
         self.log_ud['text'] = 'Log ud'
         self.log_ud['command'] = self.log__ud
@@ -144,19 +135,16 @@ class Main(tk.Frame):
         def close():
             self.create_newproductgroup.destroy()
             self.create_newproductgroup.update()
-<<<<<<< HEAD
         def save_data():
             name = str(self.pgroup_input.get())
             self.Data.new_productgroup(name)
             close()
             self.update_productgroup_tabel()
-=======
->>>>>>> Thomas
+
         self.create_newproductgroup = tk.Toplevel()
         self.create_newproductgroup.geometry("1080x720")
         self.create_newproductgroup.grab_set()
         self.create_newproductgroup.wm_title('Ny produktgruppe')
-<<<<<<< HEAD
         self.save_nprodutg = tk.Button(self.create_newproductgroup, text = 'Gem varegruppe')
         self.save_nprodutg['command'] = save_data
         self.save_nprodutg.grid(column=1, sticky="nsew")
@@ -318,11 +306,10 @@ class Main(tk.Frame):
         self.deleteproduct = tk.Button(self.productWindow, text = 'Slet vare')
         self.deleteproduct['command'] = mangler
         self.deleteproduct.grid(row=3, column=1, sticky="nsew")
-=======
+
         self.back_nprodutg = tk.Button(self.create_newproductgroup, text = 'Tilbage')
         self.back_nprodutg['command'] = close
         self.back_nprodutg.grid(column=1, sticky="nsew")
->>>>>>> Thomas
 
 
         self.tree = ttk.Treeview(self.productWindow, columns=("Id", "Name"), show = 'headings')
