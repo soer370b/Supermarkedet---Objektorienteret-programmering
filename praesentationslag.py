@@ -4,19 +4,36 @@ import matplotlib.pyplot as plt
 import numpy as np
 from logiklag import *
 from datalag import *
+from PIL import ImageTk, Image
+import os
 print("Import complete")
+
+dirname = os.path.dirname(__file__)
+
+filename = os.path.join(dirname,"growingstore.png")
+
+infile = open(filename, mode='r', encoding="utf8")
 
 class Main(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
+        self.logo_logo()
+    def logo_logo(self):
+        img = Image.open(os.path.join(dirname,"growingstore.png"))
+        infile = open(filename, mode='r', encoding="utf8")
+        img = img.resize((300, 150), Image.ANTIALIAS)
+        img = ImageTk.PhotoImage(img.convert("RGB"))
+        self.logo = tk.Label(self, image=img)
+        self.logo.image = img
+        #self.logo.image = img
+        # self.logo.grid(column =x, row = y)
 
-        self.logo = tk.Label(self, text="Logo")
         self.buttons = []
         for i in range(6):
             self.buttons.append(tk.Button(self))
-        self.main = tk.Frame(self)
+        # self.main = tk.Frame(self)
 
-        self.logo.grid(row=0, column=0, rowspan=2, sticky="nsew")
+        self.logo.grid(row=0, column=0, rowspan=2)
         self.varegruppe = self.buttons[0]
         self.varegruppe["text"] = "Varegruppe"
         self.varegruppe["command"] = self.varegrup
@@ -32,7 +49,7 @@ class Main(tk.Frame):
         self.buttons[3].grid(row=5, column=0, sticky="nsew")
         self.buttons[4].grid(row=6, column=0, sticky="nsew")
         self.buttons[5].grid(row=7, column=0, sticky="nsew")
-        self.main.grid(row=2, column=2, columnspan=2, rowspan=6)
+        self.grid(row=2, column=2, columnspan=2, rowspan=6)
 
         for row in range(8):
             self.grid_rowconfigure(row, weight=1)
@@ -97,5 +114,6 @@ class Main(tk.Frame):
 if __name__ == "__main__":
     root = tk.Tk()
     Main(root).pack(fill="both", expand=True)
+    root.title('Growingstore program')
     root.geometry("1080x720")
     root.mainloop()
