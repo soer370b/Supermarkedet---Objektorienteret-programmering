@@ -1,19 +1,17 @@
 import sqlite3
 from logiklag import Productgroup, Product
 import Data_stregkode_vare_base
-print('Starter')
-con = sqlite3.connect('database.db')
-print('Database åbnet')
-
 
 class Data:
     def __init__(self):
-
+        print('Starter')
+        self.con = sqlite3.connect('database.db')
+        print('Database åbnet')
         try:
-            con.execute("""CREATE TABLE productgroups (
+            self.con.execute("""CREATE TABLE productgroups (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name STRING)""")
-            con.execute("""CREATE TABLE products (
+            self.con.execute("""CREATE TABLE products (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, productid INTEGER, PLU INTEGER,
                 name STRING, price FLOAT, productgroup INTEGER,
                 purchaseprice FLOAT, location STRING)""")
@@ -21,31 +19,32 @@ class Data:
         except Exception as e:
             print('Tabellen er åben')
             print(e)
+        self.con.commit()
 
     def new_productgroup(self, name):
-        c = con.cursor()
+        c = self.con.cursor()
         c.execute('SELECT name FROM productgroups WHERE name = ? ', (name,))
         a = c.fetchone()
         if a == None:
-            c = con.cursor()
+            c = self.con.cursor()
             c.execute('INSERT INTO productgroups (name) VALUES (?)', (name,))
-            con.commit()
+            self.con.commit()
 
     def edit_productgroup(self, id, newname):
-        c = con.cursor()
+        c = self.con.cursor()
         c.execute('UPDATE productgroups SET name = (?) WHERE id = (?)', (newname, id))
-        con.commit()
+        self.con.commit()
 
     def delete_productgroup(self, id):
-        c = con.cursor()
+        c = self.con.cursor()
         c.execute('DELETE FROM productgroups WHERE id = (?)', (id,))
-        con.commit()
+        self.con.commit()
 
     def get_productgroups(self):
         id = []
         name = []
         productgroups = []
-        c = con.cursor()
+        c = self.con.cursor()
         c.execute('SELECT * FROM productgroups')
         data = c.fetchall()
         print('Der er ' + str(len(data)) + ' produktgrupper')
@@ -61,7 +60,7 @@ class Data:
     def new_product(self, name, productid, PLU, price, productgroup, purchaseprice, location):
         def productgroup_chek(productgroup):
             cheker = False
-            pg = Data.get_productgroups()
+            pg = self.get_productgroups()
             for i in pg:
                 if i.name == productgroup:
                     cheker = True
@@ -83,22 +82,22 @@ class Data:
 
         if productgroup_chek(productgroup) == True:
             if PLU == '':
-                c = con.cursor()
+                c = self.con.cursor()
                 c.execute('''INSERT INTO products (name, productid, price,
                             productgroup, purchaseprice,
                             location) VALUES (?, ?, ?, ?, ?, ?)''', (name,
                             productid, price, productgroup,
                             purchaseprice, location, ))
-                con.commit()
+                self.con.commit()
 
             else:
-                c = con.cursor()
+                c = self.con.cursor()
                 c.execute('''INSERT INTO products (name, productid, PLU, price,
                             productgroup, purchaseprice,
                             location) VALUES (?, ?, ?, ?, ?, ?, ?)''', (name,
                             productid, PLU, price, productgroup,
                             purchaseprice, location, ))
-                con.commit()
+                self.con.commit()
         else:
             print('Produktgruppen findes ikke!')
 
