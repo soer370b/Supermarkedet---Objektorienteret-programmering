@@ -246,30 +246,39 @@ class Main(tk.Frame):
             self.create_newproduct.geometry("1080x720")
             self.create_newproduct.grab_set()
             self.create_newproduct.wm_title('Nyt produkt')
+
             self.save_nprodut = tk.Button(self.create_newproduct, text = 'Gem produkt')
             self.save_nprodut['command'] = save_data
             self.save_nprodut.grid(column=1, sticky="nsew")
+
             self.back_nprodut = tk.Button(self.create_newproduct, text = 'Tilbage')
             self.back_nprodut['command'] = close
             self.back_nprodut.grid(column=1, sticky="nsew")
+
             tk.Label(self.create_newproduct, text='Indtast navn: ').grid(row=0, column=2)
             self.input_name = tk.Entry(self.create_newproduct)
             self.input_name.grid(row=1, column=2)
+
             tk.Label(self.create_newproduct, text='Indtast produkt ID: ').grid(row=2, column=2)
             self.input_pid = tk.Entry(self.create_newproduct)
             self.input_pid.grid(row=3, column=2)
+
             tk.Label(self.create_newproduct, text='Indtast PLU(eventuelt): ').grid(row=4, column=2)
             self.input_PLU = tk.Entry(self.create_newproduct)
             self.input_PLU.grid(row=5, column=2)
+
             tk.Label(self.create_newproduct, text='Indtast pris: ').grid(row=6, column=2)
             self.input_price = tk.Entry(self.create_newproduct)
             self.input_price.grid(row=7, column=2)
+
             tk.Label(self.create_newproduct, text='Indtast produktgruppe: ').grid(row=8, column=2)
             self.input_pgroup = tk.Entry(self.create_newproduct)
             self.input_pgroup.grid(row=9, column=2)
+
             tk.Label(self.create_newproduct, text='Indtast købspris: ').grid(row=10, column=2)
             self.input_pprice = tk.Entry(self.create_newproduct)
             self.input_pprice.grid(row=11, column=2)
+
             tk.Label(self.create_newproduct, text='Indtast placering: ').grid(row=12, column=2)
             self.input_location = tk.Entry(self.create_newproduct)
             self.input_location.grid(row=13, column=2)
