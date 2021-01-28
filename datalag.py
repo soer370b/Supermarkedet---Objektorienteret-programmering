@@ -1,14 +1,6 @@
 import sqlite3
 from logiklag import Productgroup, Product
 import Data_stregkode_vare_base
-<<<<<<< HEAD
-
-print('Starter')
-con = sqlite3.connect('database.db')
-print('Database åbnet')
-
-=======
->>>>>>> 817dfa1bc07ea913e5859d1fbb0ed71a4c5b38eb
 
 class Data:
     def __init__(self):
@@ -19,33 +11,15 @@ class Data:
             self.con.execute("""CREATE TABLE productgroups (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name STRING)""")
-<<<<<<< HEAD
-            con.execute("""CREATE TABLE products (
-                id INTEGER PRIMARY KEY AUTOINCREMENT, productid INTEGER, PLU INTEGER,
-                id INTEGER PRIMARY KEY AUTOINCREMENT, productid INTEGER,
-=======
             self.con.execute("""CREATE TABLE products (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, productid INTEGER, PLU INTEGER,
->>>>>>> 817dfa1bc07ea913e5859d1fbb0ed71a4c5b38eb
                 name STRING, price FLOAT, productgroup INTEGER,
                 purchaseprice FLOAT, location STRING)""")
             print('Tabellen er oprettet')
         except Exception as e:
             print('Tabellen er åben')
             print(e)
-<<<<<<< HEAD
-    # def new_productgroup(self, name):
-    #     c = con.cursor()
-    #     c.execute('SELECT name FROM productgroups WHERE name = ? ', (name,))
-    #     a = c.fetchone()
-    #     if a[0] != name:
-    #         Productgroup.name = name
-    #         c = con.cursor()
-    #         c.execute('INSERT INTO productgroups (name) VALUES (?)', (Productgroup.name,))
-    #         con.commit()
-=======
         self.con.commit()
->>>>>>> 817dfa1bc07ea913e5859d1fbb0ed71a4c5b38eb
 
     def new_productgroup(self, name):
         c = self.con.cursor()
@@ -64,29 +38,13 @@ class Data:
     def delete_productgroup(self, id):
         c = self.con.cursor()
         c.execute('DELETE FROM productgroups WHERE id = (?)', (id,))
-<<<<<<< HEAD
-    def edit_productgroup(self, name, newname):
-        c = con.cursor()
-        c.execute('UPDATE productgroups SET name = (?) WHERE name = (?)', (newname, name))
-        con.commit()
-
-    def delete_productgroupe(self, name):
-        c = con.cursor()
-        c.execute('DELETE FROM productgroups WHERE name = (?)', (name,))
-        con.commit()
-=======
         self.con.commit()
->>>>>>> 817dfa1bc07ea913e5859d1fbb0ed71a4c5b38eb
 
     def get_productgroups(self):
         id = []
         name = []
         productgroups = []
-<<<<<<< HEAD
-        c = con.cursor()
-=======
         c = self.con.cursor()
->>>>>>> 817dfa1bc07ea913e5859d1fbb0ed71a4c5b38eb
         c.execute('SELECT * FROM productgroups')
         data = c.fetchall()
         print('Der er ' + str(len(data)) + ' produktgrupper')
@@ -163,38 +121,3 @@ if __name__ == "__main__":
     for p in a:
         print(p.id, p.name)
 '''
-<<<<<<< HEAD
-            # print('Id = ' + pid)
-            pname = str(data[i][1])
-            # print('Navn = ' + pname + '\n')
-            id.append(pid)
-            name.append(pname)
-        list = [id, name]
-        return list
-
-    def new_product(self, name, productid, price, productgroup, purchaseprice, location):
-        Product.name = name
-        Product.productid = productid
-        Product.price = price
-        Product.productgroup = productgroup
-        # Product.purchasedate = purchasedate
-        Product.purchaseprice = purchaseprice
-        Product.location = location
-
-        c = con.cursor()
-        c.execute('''INSERT INTO products (name, productid, price,
-                    productgroup, purchaseprice,
-                    location) VALUES (?, ?, ?, ?, ?, ?)''', (Product.name,
-                    Product.productid, Product.price, Product.productgroup,
-                    Product.purchaseprice, Product.location, ))
-        con.commit()
-    #note Der mangler en datetime i varekolonnen.
-
-
-if __name__ == "__main__":
-    data = Data()
-    name = 'Fisk'
-    data.new_productgroup(name)
-    data.get_productgroups()
-=======
->>>>>>> 817dfa1bc07ea913e5859d1fbb0ed71a4c5b38eb
