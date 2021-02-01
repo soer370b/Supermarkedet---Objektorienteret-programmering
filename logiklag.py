@@ -1,12 +1,13 @@
 import datetime
 
 class Product():
-    def __init__(self, id, name, price, pprice, location):
-        self.productid = id
+    def __init__(self, id, pid, PLU, name, price, productgroup, pprice, location):
+        self.id = id
+        self.pid = pid
+        self.plu = PLU
         self.name = name
         self.price = price
-        # self.productgroup = Productgroup
-        self.purchasedate = datetime.date()
+        self.productgroup = productgroup
         self.purchaseprice = pprice
         self.location = location
 
