@@ -127,7 +127,7 @@ class Data:
             price = str(data[i][4])
             print('Pris = ' + price + '\n')
             productgroup = str(data[i][5])
-            print('Produuktgruppe = ' + productgroup + '\n')
+            print('Produktgruppe = ' + productgroup + '\n')
             pprice = str(data[i][6])
             print('Købspris = ' + pprice + '\n')
             location = str(data[i][7])
