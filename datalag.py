@@ -101,6 +101,51 @@ class Data:
         else:
             print('Produktgruppen findes ikke!')
 
+    def get_products(self):
+        id = []
+        pid = []
+        PLU = []
+        name = []
+        price = []
+        productgroup = []
+        pprice = []
+        location = []
+        products = []
+        c = self.con.cursor()
+        c.execute('SELECT * FROM products')
+        data = c.fetchall()
+        print('Der er ' + str(len(data)) + ' produkter')
+        for i in range(len(data)):
+            id = str(data[i][0])
+            print('Id = ' + id)
+            pid = str(data[i][1])
+            print('Produkt id = ' + pid + '\n')
+            PLU = str(data[i][2])
+            print('PLU = ' + PLU + '\n')
+            name = str(data[i][3])
+            print('Navn = ' + name + '\n')
+            price = str(data[i][4])
+            print('Pris = ' + price + '\n')
+            productgroup = str(data[i][5])
+            print('Produuktgruppe = ' + productgroup + '\n')
+            pprice = str(data[i][6])
+            print('Købspris = ' + pprice + '\n')
+            location = str(data[i][7])
+            print('Placering i butik = ' + location + '\n')
+            p = Product(id, pid, PLU, name, price, productgroup, pprice, location)
+            products.append(p)
+        return products
+
+    def edit_product(self, id, newname):
+        c = self.con.cursor()
+        c.execute('UPDATE products SET name = (?) WHERE id = (?)', (newname, id))
+        self.con.commit()
+
+    def delete_product(self, id):
+        c = self.con.cursor()
+        c.execute('DELETE FROM products WHERE id = (?)', (id,))
+        self.con.commit()
+
 if __name__ == "__main__":
     Data = Data()
     name = 'Øl'
@@ -111,7 +156,7 @@ if __name__ == "__main__":
     pprice = 5
     location = 'Frost'
     Data.new_product(name, id, PLU, price, productgroup, pprice, location)
-
+    Data.get_products()
 '''
     data = Data()
     name = 'Fisk'

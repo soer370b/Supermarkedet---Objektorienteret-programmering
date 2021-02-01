@@ -84,7 +84,6 @@ class Main(tk.Frame):
     def log__ud(self):
         print('Log ud')
 
-
     def productgroup_Window(self):
         def close():
             self.productgroupWindow.destroy()
@@ -118,7 +117,6 @@ class Main(tk.Frame):
         self.tree.bind('<ButtonRelease-1>', self.select_item)
         self.update_productgroup_tabel()
         self.tree.grid(row=0, rowspan=4, column = 2)
-
 
     def createnewproductgroup(self):
         def close():
@@ -220,12 +218,34 @@ class Main(tk.Frame):
         tk.Label(self.create_newproductgroup, text='Den valgte produktgruppe er: {}'.format(item)).grid(row=0, column=2)
 
 #products
+    def update_product_tabel(self):
+        l = self.Data.get_products()
+
+        self.tree.delete(*self.tree.get_children())
+        for p in l:
+            id = int(p.id)
+            pid = int(p.pid)
+            PLU = p.plu
+            name = str(p.name)
+            price = float(p.price)
+            productgroup = str(p.productgroup)
+            pprice = float(p.purchaseprice)
+            location =  str(p.location)
+            self.tree.insert("", 0 , values=(id, pid, PLU, name, price, productgroup, pprice, location))
+        self.tree.heading("#1", text="Stregkode")
+        self.tree.heading("#2", text="PLU")
+        self.tree.heading("#3", text="Navn")
+        self.tree.heading("#4", text="Pris")
+        self.tree.heading("#5", text="Produktgruppe")
+        self.tree.heading("#6", text="Indkøbspris")
+        self.tree.heading("#7", text="Placering")
+
     def products(self):
         def close():
             self.productWindow.destroy()
             self.productWindow.update()
         def mangler():
-            pass
+            print('Mangler at blive implementeret')
         def new_product():
             def close():
                 self.create_newproduct.destroy()
@@ -241,7 +261,8 @@ class Main(tk.Frame):
                 location = str(self.input_location.get())
                 self.Data.new_product(name, pid, PLU, price, pgroup, pprice, location)
                 close()
-                # self.update_productgroup_tabel() skal opdatere vare tabellen
+                self.update_product_tabel()
+
             self.create_newproduct = tk.Toplevel()
             self.create_newproduct.geometry("1080x720")
             self.create_newproduct.grab_set()
@@ -283,6 +304,88 @@ class Main(tk.Frame):
             self.input_location = tk.Entry(self.create_newproduct)
             self.input_location.grid(row=13, column=2)
 
+        def delete_product_():
+            def close():
+                self.delete_product.destroy()
+                self.delete_product.update()
+
+            def get_item():
+                item = self.tree.focus()
+                dic = self.tree.item(item)
+                list = dic.get('values')
+                id = list[0]
+                navn = list[3]
+                return id, navn
+
+            def delete_product():
+                self.Data.delete_product(id)
+                self.update_product_tabel()
+                close()
+
+            self.delete_product = tk.Toplevel()
+            self.delete_product.geometry("1080x720")
+            self.delete_product.grab_set()
+            self.delete_product.wm_title('Slet varer')
+
+            id, item = get_item()
+
+            self.back_nprodutg = tk.Button(self.delete_product, text = 'Tilbage')
+            self.back_nprodutg['command'] = close
+            self.back_nprodutg.grid(column=1, sticky="nsew")
+
+            self.save_nprodutg = tk.Button(self.delete_product, text = 'Slet vare')
+            self.save_nprodutg.grid(column=1, sticky="nsew")
+            self.save_nprodutg['command'] = delete_product
+
+            tk.Label(self.delete_product, text='Det valgte produkt er: {}'.format(item)).grid(row=0, column=2)
+
+        def edit_product_():
+            def close():
+                self.create_newproductgroup.destroy()
+                self.create_newproductgroup.update()
+
+            def get_item():
+                item = self.tree.focus()
+                dic = self.tree.item(item)
+                list = dic.get('values')
+                id = list[0]
+                pid = list[1]
+                PLU = list[2]
+                name = list[3]
+                price = list[4]
+                productgroup = list[5]
+                pprice = list[6]
+                location = list[7]
+                return id, name
+
+            def edit_product():
+                new_name = self.epgroup_input.get()
+                print(type(old_id))
+                self.Data.edit_product(old_id, new_name)
+                self.update_product_tabel()
+                close()
+
+            self.create_newproductgroup = tk.Toplevel()
+            self.create_newproductgroup.geometry("1080x720")
+            self.create_newproductgroup.grab_set()
+            self.create_newproductgroup.wm_title('Ret varer')
+
+            old_id, old_item = get_item()
+
+            self.back_nprodutg = tk.Button(self.create_newproductgroup, text = 'Tilbage')
+            self.back_nprodutg['command'] = close
+            self.back_nprodutg.grid(column=1, sticky="nsew")
+
+            self.save_nprodutg = tk.Button(self.create_newproductgroup, text = 'Gem varegruppe')
+            self.save_nprodutg.grid(column=1, sticky="nsew")
+            self.save_nprodutg['command'] = edit_product
+
+            tk.Label(self.create_newproductgroup, text='Den valgte produktgruppe er: {}'.format(old_item)).grid(row=0, column=2)
+            tk.Label(self.create_newproductgroup, text='Indtast rettelse: ').grid(row=1, column=2)
+
+            self.epgroup_input = tk.Entry(self.create_newproductgroup)
+            self.epgroup_input.grid(row=1, column=3)
+
         self.productWindow = tk.Toplevel()
         self.productWindow.geometry("1080x720")
         self.productWindow.grab_set()
@@ -297,19 +400,19 @@ class Main(tk.Frame):
         self.newproduct.grid(row=1, column=1, sticky="nsew")
 
         self.editproduct = tk.Button(self.productWindow, text = 'Ret vare')
-        self.editproduct['command'] = mangler
+        self.editproduct['command'] = edit_product_
         self.editproduct.grid(row=2, column=1, sticky="nsew")
 
         self.deleteproduct = tk.Button(self.productWindow, text = 'Slet vare')
-        self.deleteproduct['command'] = mangler
+        self.deleteproduct['command'] = delete_product_
         self.deleteproduct.grid(row=3, column=1, sticky="nsew")
 
 
-        self.tree = ttk.Treeview(self.productWindow, columns=("Id", "Name"), show = 'headings')
+        self.tree = ttk.Treeview(self.productWindow, columns=("Id", "Produkt id", "PLU", "Name", "Pris", "Produktgruppe", "Indkøbspris", "Placering"), show = 'headings')
         self.tree.heading("#1", text="Varer")
-        self.tree['displaycolumns'] = ('Name')
+        self.tree['displaycolumns'] = ("Produkt id", "PLU", "Name", "Pris", "Produktgruppe", "Indkøbspris", "Placering")
         self.tree.bind('<ButtonRelease-1>', self.select_item)
-        self.update_productgroup_tabel()
+        self.update_product_tabel()
         self.tree.grid(row=0, rowspan=4, column = 2)
 
 if __name__ == "__main__":
