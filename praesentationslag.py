@@ -288,7 +288,7 @@ class Main(tk.Frame):
             tk.Label(self.create_newproduct, text='Indtast produktgruppe: ').grid(row=8, column=2)
             self.input_pgroup = tk.Entry(self.create_newproduct)
             self.input_pgroup.grid(row=9, column=2)
-            tk.Label(self.create_newproduct, text='Indtast købspris: ').grid(row=10, column=2)
+            tk.Label(self.create_newproduct, text='Indtast indkøbspris: ').grid(row=10, column=2)
             self.input_pprice = tk.Entry(self.create_newproduct)
             self.input_pprice.grid(row=11, column=2)
             tk.Label(self.create_newproduct, text='Indtast placering: ').grid(row=12, column=2)

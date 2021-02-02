@@ -157,12 +157,3 @@ if __name__ == "__main__":
     location = 'Frost'
     Data.new_product(name, id, PLU, price, productgroup, pprice, location)
     Data.get_products()
-'''
-    data = Data()
-    name = 'Fisk'
-    data.new_productgroup(name)
-    a = data.get_productgroups()
-
-    for p in a:
-        print(p.id, p.name)
-'''
